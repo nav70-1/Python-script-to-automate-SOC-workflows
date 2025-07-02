@@ -1,53 +1,4 @@
 # SOC Automation Script: Log Ingestion & Threat Intelligence Lookup (VirusTotal)
-
-## Overview
-This Python script automates two key SOC workflows:
-- **Log Ingestion:** Reads a log file and extracts indicators (IP addresses and SHA256 hashes).
-- **Threat Intelligence Lookup:** Queries the VirusTotal API for each indicator to enrich alerts with threat intelligence.
-
-## Requirements
-- Python 3.x
-- Internet connection
-- VirusTotal API key (get from https://www.virustotal.com/)
-
-The script will automatically install the required Python packages (`requests`, `pandas`) if they are not present.
-
-## Setup
-1. Place the script (`assing.py`) in your working directory.
-2. Create a log file named `sample.log` in the same directory.
-   - Add lines containing IP addresses and/or SHA256 hashes.
-3. Edit the script to add your VirusTotal API key:
-   ```python
-   VT_API_KEY = "YOUR_API_KEY_HERE"
-   ```
-
-## Usage
-Open a terminal in the script directory and run:
-```
-python assing.py
-```
-
-## What It Does
-- Extracts all IP addresses and SHA256 hashes from `sample.log`.
-- Looks up each indicator using the VirusTotal API.
-- Prints the results to the console.
-- Saves all results to a CSV file named `vt_results.csv`.
-
-## Output
-- **Console:** Shows each indicator and its VirusTotal result.
-- **CSV File:** `vt_results.csv` contains all indicators and their corresponding results for further analysis.
-
-## Example
-Sample log file (`sample.log`):
-```
-8.8.8.8
-1.1.1.1
-44d88612fea8a8f36de82e1278abb02f8a5e6a8e6c3e5c6e6c3e5c6e6c3e5c6e
-```
-
-## Full Script
-```python
-# SOC Automation Script: Log Ingestion & Threat Intelligence Lookup (VirusTotal)
 # Step 1: Install required packages if not present
 try:
     import requests
@@ -99,7 +50,7 @@ if __name__ == "__main__":
     # Sample usage
     log_indicators = read_log_file('sample.log')
     print("Extracted indicators:", log_indicators)
-    VT_API_KEY = "YOUR_API_KEY_HERE"  # Replace with your actual API key
+    VT_API_KEY = "f2c64cddaa4b7e3d1c540075ed8e2f1bfb66809e96cb06864905257517945069"  # Replace with your actual API key
     # Save results to CSV
     import pandas as pd
     results = []
@@ -110,4 +61,3 @@ if __name__ == "__main__":
     df = pd.DataFrame(results)
     df.to_csv("vt_results.csv", index=False)
     print("Results saved to vt_results.csv")
-```
